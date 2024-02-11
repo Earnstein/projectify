@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 const playfair = Playfair({
   weight: "600",
   subsets: ["latin"],
+  display: "swap",
+  adjustFontFallback: false
 });
 
 const palanquin = Palanquin({

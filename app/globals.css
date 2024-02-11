@@ -80,3 +80,13 @@ body,
     @apply bg-background text-foreground;
   }
 }
+
+textarea::-webkit-scrollbar{
+  width: 10px;
+  
+}
+
+textarea::-webkit-scrollbar-thumb{
+  background-color: rgb(209, 209, 209);
+  border-radius: 10px;
+}

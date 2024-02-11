@@ -9,6 +9,8 @@ import { usePathname } from "next/navigation";
 const playfair = Playfair({
   weight: "600",
   subsets: ["latin"],
+  display: "swap",
+  adjustFontFallback: false
 });
 
 const palanquin = Palanquin({
@@ -71,7 +73,7 @@ const Sidebar = () => {
         {/* HEADER */}
         <Link href="/dashboard" className="flex items-center pl-3 mb-14">
           <div className="relative w-8 h-8 mr-4">
-            <Image fill alt="logo" src="/logo.png" />
+            <Image fill sizes="w-full h-full" alt="logo" src="/logo.png" />
           </div>
           <h1 className={cn("text-xl font-bold", playfair.className)}>
             Projectify

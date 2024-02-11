@@ -9,11 +9,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Header from "@/components/Header";
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
 import { Empty } from '@/components/Empty';
 import { Loader } from '@/components/Loader';
-import { cn } from '../../../../lib/utils';
+import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/use-avatar';
 import { BotAvatar } from '@/components/bot-avatar';
 import { Input } from '@/components/ui/input';
@@ -47,9 +46,7 @@ const Conversation = () => {
       
       const response = await axios.post('/api/conversation', { messages: newMessages });
       setMessages((current) => [...current, userMessage, response.data]);
-      console.log('OpenAI API Response:', response.data);
-      console.log('Messages:', messages);
-
+      
       form.reset();
     } catch (error: any) {
       if (error) {
@@ -98,7 +95,7 @@ const Conversation = () => {
                     </FormItem>
                   )}
                   />
-                  <Button className='col-span-12 lg:col-span-2 lg:self-end w-full'
+                  <Button className='col-span-12 lg:col-span-2 lg:self-end w-full bg-violet-500 hover:bg-violet-700'
                   disabled={isLoading}>
                     send
                   </Button>
@@ -112,7 +109,7 @@ const Conversation = () => {
               {
                 isLoading && (
                   <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
-                    <Loader/>
+                    <Loader name="Earnstein is thinking..."/>
                   </div>
                 )
               }
@@ -129,7 +126,7 @@ const Conversation = () => {
                     <div key={index}
                     className={cn("p-4 w-full flex flex-col items-start rounded-lg gap-y-2",
                     message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}>
-                      <div>{message.role === "user" ? <UserAvatar/> : <BotAvatar/>}</div>
+                      <div>{message.role === "user" ? <UserAvatar/> : <BotAvatar name="Earnstein"/>}</div>
 
                       <p className='text-sm'>{message.content}</p>
                     </div>

@@ -1,7 +1,10 @@
 import Image from "next/image";
 
+interface Name {
+  name: string
+}
 
-const Loader = () => {
+const Loader = ({name}:Name) => {
   return (
     <div className="h-full flex  space-x-4 items-center
     ">
@@ -13,9 +16,9 @@ const Loader = () => {
         />
       </div>
 
-      <div className="text-sm text-muted-foreground">
-          Earnstein is thinking...
-      </div>
+      <p className="text-sm text-muted-foreground">
+          {name} is thinking...
+      </p>
     </div>
   )
 }

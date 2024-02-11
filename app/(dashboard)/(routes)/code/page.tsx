@@ -4,7 +4,7 @@ import {  Code } from 'lucide-react';
 import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import axios from "axios";
-import { formSchema } from "@/app/(dashboard)/(routes)/conversation/constants";
+import { formSchema } from "@/app/(dashboard)/(routes)/code/constants";
 import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
 import Header from "@/components/Header";
@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { Empty } from '@/components/Empty';
 import { Loader } from '@/components/Loader';
-import { cn } from '../../../../lib/utils';
+import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/use-avatar';
 import { BotAvatar } from '@/components/bot-avatar';
 import { Input } from '@/components/ui/input';
@@ -47,8 +47,6 @@ const CodePage = () => {
       
       const response = await axios.post('/api/code', { messages: newMessages });
       setMessages((current) => [...current, userMessage, response.data]);
-      console.log('OpenAI API Response:', response.data);
-      console.log('Messages:', messages);
 
       form.reset();
     } catch (error: any) {
@@ -98,7 +96,7 @@ const CodePage = () => {
                     </FormItem>
                   )}
                   />
-                  <Button className='col-span-12 lg:col-span-2 lg:self-end w-full'
+                  <Button className='col-span-12 lg:col-span-2 lg:self-end w-full bg-green-700 hover:bg-green-800'
                   disabled={isLoading}>
                     send
                   </Button>
@@ -112,14 +110,14 @@ const CodePage = () => {
               {
                 isLoading && (
                   <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
-                    <Loader name="Peterlight"/>
+                    <Loader name="Peterlight is thinking..."/>
                   </div>
                 )
               }
 
               {
                 messages.length === 0  && !isLoading && (
-                  <Empty label="Let's start working on your project..."/>
+                  <Empty label="Hello world..."/>
                 )
               }
 

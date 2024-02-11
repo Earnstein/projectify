@@ -175,7 +175,7 @@ const Imagepage = () => {
 
               {
                 images.length === 0  && !isLoading && (
-                  <Empty label="No image generated..."/>
+                  <Empty label="No image generated..." src="/music.jpg"/>
                 )
               }
 

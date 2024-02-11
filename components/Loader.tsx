@@ -17,7 +17,7 @@ const Loader = ({name}:Name) => {
       </div>
 
       <p className="text-sm text-muted-foreground">
-          {name} is thinking...
+          {name}
       </p>
     </div>
   )

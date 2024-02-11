@@ -17,6 +17,8 @@ import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/use-avatar';
 import { BotAvatar } from '@/components/bot-avatar';
 import { Input } from '@/components/ui/input';
+import { useProModal } from '@/hooks/use-pro-modal';
+import { toast } from 'sonner';
 
 
 
@@ -31,6 +33,8 @@ interface UserChat {
 const CodePage = () => {
   const [messages, setMessages] = useState<UserChat[]>([])
   const router = useRouter();
+  const promodal = useProModal();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,10 +54,11 @@ const CodePage = () => {
 
       form.reset();
     } catch (error: any) {
-      if (error) {
-       console.error(error,  "ERROR ON SUBMIT")
-      } else {
-        console.log("something went wrong")
+      if (error?.response?.status === 403){
+        promodal.onOpen();
+      }else{
+        toast.error("Something went wrong")
+
       }
     } finally {
       router.refresh();
@@ -117,7 +122,7 @@ const CodePage = () => {
 
               {
                 messages.length === 0  && !isLoading && (
-                  <Empty label="Hello world..."/>
+                  <Empty label="Hello world... " src="/code.jpg"/>
                 )
               }
 

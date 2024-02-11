@@ -16,12 +16,16 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardFooter } from '@/components/ui/card';
 import Image from 'next/image';
+import { useProModal } from '@/hooks/use-pro-modal';
+import { toast } from 'sonner';
 
 
 
 const Imagepage = () => {
   const [images, setImages] = useState<string[]>([]);
   const router = useRouter();
+  const promodal = useProModal();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,15 +41,15 @@ const Imagepage = () => {
     try {
       setImages([]);
       const response = await axios.post('/api/image', values);
-      console.log("RESPONSEEEE", response.data)
       const urls = response.data.map((image: {url: string})=> image.url);
       setImages(urls)
       form.reset();
     } catch (error: any) {
-      if (error) {
-       console.error(error,  "ERROR ON SUBMIT")
-      } else {
-        console.log("something went wrong")
+      if (error?.response?.status === 403){
+        promodal.onOpen();
+      }else{
+        toast.error("Something went wrong")
+
       }
     } finally {
       router.refresh();

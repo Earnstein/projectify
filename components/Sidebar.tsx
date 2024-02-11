@@ -1,10 +1,11 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Playfair, Palanquin } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Code, ImageIcon, LayoutDashboard, MessagesSquare, Music, Settings, VideoIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
+import LimitCounter from "@/components/LimitCounter";
+import { Playfair, Palanquin } from "next/font/google";
 
 const playfair = Playfair({
   weight: "600",
@@ -32,7 +33,7 @@ const routes = [
     color: "text-violet-500",
   },
   {
-    label: "Chart Generation",
+    label: "Image Generation",
     icon: ImageIcon,
     href: "/image",
     color: "text-pink-700",
@@ -47,7 +48,7 @@ const routes = [
     label: "Music Generation",
     icon: Music,
     href: "/music",
-    color: "text-emerald-500",
+    color: "text-yellow-500",
   },
   {
     label: "Code Generation",
@@ -62,7 +63,13 @@ const routes = [
     href: "/settings"
   },
 ];
-const Sidebar = () => {
+
+interface sidebarProps {
+  apiLimitCount: number;
+}
+
+
+const Sidebar = ({apiLimitCount = 0}: sidebarProps) => {
   const pathname = usePathname();
 
 
@@ -99,8 +106,11 @@ const Sidebar = () => {
             </Link>
           ))}
         </div>
-
       </div>
+
+      <LimitCounter
+      apiLimitCount={apiLimitCount}
+      />
     </div>
   );
 };

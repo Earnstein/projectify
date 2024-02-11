@@ -13,11 +13,15 @@ import { useRouter } from "next/navigation";
 import { Empty } from "@/components/Empty";
 import { Loader } from "@/components/Loader";
 import { Input } from "@/components/ui/input";
+import { useProModal } from "@/hooks/use-pro-modal";
+import { toast } from "sonner";
 
 
 const Musicpage = () => {
   const [music, setMusic] = useState<string>();
   const router = useRouter();
+  const promodal = useProModal();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,15 +34,14 @@ const Musicpage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setMusic(undefined);
-
       const response = await axios.post("/api/music", values);
       setMusic(response.data);
       form.reset();
     } catch (error: any) {
-      if (error) {
-        console.error(error, "ERROR ON SUBMIT");
-      } else {
-        console.log("something went wrong");
+      if (error?.response?.status === 403){
+        promodal.onOpen();
+      } else{
+        toast.error("Something went wrong")
       }
     } finally {
       router.refresh();
@@ -97,7 +100,7 @@ const Musicpage = () => {
             </div>
           )}
 
-          {!music && !isLoading && <Empty label="No music generated..." />}
+          {!music && !isLoading && <Empty label="No music generated..." src="/music.jpg" />}
 
           {music && (
             <audio controls className="w-full mt-8">

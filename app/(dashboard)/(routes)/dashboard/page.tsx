@@ -45,8 +45,8 @@ const tools = [
     label: "Music Generation",
     icon: Music,
     href: "/music",
-    color: "text-emerald-500",
-    bgColor: "bg-emerald-500/10",
+    color: "text-yellow-500",
+    bgColor: "bg-yellow-500/10",
   },
   {
     label: "Code Generation",

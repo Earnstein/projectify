@@ -13,10 +13,14 @@ import { useRouter } from "next/navigation";
 import { Empty } from "@/components/Empty";
 import { Loader } from "@/components/Loader";
 import { Input } from "@/components/ui/input";
+import { useProModal } from "@/hooks/use-pro-modal";
+import { toast } from "sonner";
 
 const Videopage = () => {
   const [video, setVideo] = useState<string>();
   const router = useRouter();
+  const promodal = useProModal();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -34,10 +38,10 @@ const Videopage = () => {
       setVideo(response.data);
       form.reset();
     } catch (error: any) {
-      if (error) {
-        console.error(error, "ERROR ON SUBMIT");
-      } else {
-        console.log("something went wrong");
+      if (error?.response?.status === 403){
+        promodal.onOpen();
+      }else{
+        toast.error("Something went wrong")
       }
     } finally {
       router.refresh();
@@ -96,7 +100,7 @@ const Videopage = () => {
             </div>
           )}
 
-          {!video && !isLoading && <Empty label="No Video generated..." />}
+          {!video && !isLoading && <Empty label="No Video generated..." src="/music.jpg"/>}
 
           {video && (
             <video

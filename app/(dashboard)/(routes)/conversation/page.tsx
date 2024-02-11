@@ -16,6 +16,8 @@ import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/use-avatar';
 import { BotAvatar } from '@/components/bot-avatar';
 import { Input } from '@/components/ui/input';
+import { useProModal } from '@/hooks/use-pro-modal';
+import { toast } from 'sonner';
 
 
 
@@ -28,8 +30,10 @@ interface UserChat {
 }
 
 const Conversation = () => {
-  const [messages, setMessages] = useState<UserChat[]>([])
+  const [messages, setMessages] = useState<UserChat[]>([]);
   const router = useRouter();
+  const promodal = useProModal();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,16 +47,14 @@ const Conversation = () => {
     try {
       const userMessage: UserChat = { role: "user", content: values.prompt };
       const newMessages = [...messages, userMessage];
-      
       const response = await axios.post('/api/conversation', { messages: newMessages });
       setMessages((current) => [...current, userMessage, response.data]);
-      
       form.reset();
     } catch (error: any) {
-      if (error) {
-       console.error(error,  "ERROR ON SUBMIT")
-      } else {
-        console.log("something went wrong")
+      if (error?.response?.status === 403){
+        promodal.onOpen();
+      }else{
+        toast.error("Something went wrong")
       }
     } finally {
       router.refresh();
@@ -116,7 +118,7 @@ const Conversation = () => {
 
               {
                 messages.length === 0  && !isLoading && (
-                  <Empty label="Let's start working on your project..."/>
+                  <Empty label="Let's start working on your project..." src="/engineer.png"/>
                 )
               }
 

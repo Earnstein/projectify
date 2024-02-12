@@ -28,6 +28,13 @@ const tools = [
 
   },
   {
+    label: "Code Generation",
+    icon: Code,
+    href: "/code",
+    color: "text-green-700",
+    bgColor: "bg-green-700/10",
+  },
+  {
     label: "Chart Generation",
     icon: ImageIcon,
     href: "/image",
@@ -48,13 +55,7 @@ const tools = [
     color: "text-yellow-500",
     bgColor: "bg-yellow-500/10",
   },
-  {
-    label: "Code Generation",
-    icon: Code,
-    href: "/code",
-    color: "text-green-700",
-    bgColor: "bg-green-700/10",
-  }
+  
 ]
 
 const DashboardPage = () => {

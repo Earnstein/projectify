@@ -29,7 +29,7 @@ const MobileSidebar = ({apiLimitCount}:NavbarProps) => {
       </SheetTrigger>
 
       <SheetContent side="left" className="p-0">
-          <Sidebar/>
+          <Sidebar apiLimitCount={apiLimitCount}/>
       </SheetContent>
     </Sheet>
   );

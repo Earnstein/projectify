@@ -5,14 +5,16 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 
 
 
+interface NavbarProps {
+  apiLimitCount: number;
+}
 
 
-
-const Navbar = () => {
+const Navbar = ({apiLimitCount}:NavbarProps) => {
   const isMobileScreen = useMediaQuery("(min-width: 768px)");
   return (
     <div className="flex item-center p-4">
-      {!isMobileScreen &&  <MobileSidebar/>}
+      {!isMobileScreen &&  <MobileSidebar apiLimitCount={apiLimitCount}/>}
       <div className="flex w-full justify-end">
           <UserButton afterSignOutUrl="/"/>
       </div>

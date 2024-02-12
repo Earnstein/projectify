@@ -100,7 +100,7 @@ const Videopage = () => {
             </div>
           )}
 
-          {!video && !isLoading && <Empty label="No Video generated..." src="/music.jpg"/>}
+          {!video && !isLoading && <Empty label="No Video generated..." src="/video.png"/>}
 
           {video && (
             <video

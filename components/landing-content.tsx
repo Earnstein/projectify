@@ -19,14 +19,14 @@ const palanquin = Palanquin({
 
 const testimonials = [
   {
-    name: "Faud",
+    name: "Fuad",
     avatar: "F",
     title: "Project Engineer",
     description: "This is the best application I've ever used!",
   },
   {
     name: "Gbolahan",
-    avatar: "F",
+    avatar: "G",
     title: "Contractor",
     description: "I use this daily for generating new project templates!",
   },
@@ -37,7 +37,7 @@ const testimonials = [
     description: "This app has changed my life, cannot imagine working without it!",
   },
   {
-    name: "Mary",
+    name: "Blessing",
     avatar: "M",
     title: "Consultant",
     description: "The best in class, definitely worth the premium subscription!",
@@ -46,7 +46,7 @@ const testimonials = [
 
 export const LandingContent = () => {
   return (
-    <div className="px-10 pb-20">
+    <div className="px-10 pb-16">
       <h2 className="text-center text-4xl text-white font-extrabold mb-10">Testimonials</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {testimonials.map((item) => (

@@ -35,7 +35,7 @@ const tools = [
     bgColor: "bg-green-700/10",
   },
   {
-    label: "Chart Generation",
+    label: "Image Generation",
     icon: ImageIcon,
     href: "/image",
     color: "text-pink-700",

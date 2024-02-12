@@ -63,12 +63,9 @@ const routes = [
   },
 ];
 
-interface sidebarProps {
-  apiLimitCount: number;
-}
 
 
-const Sidebar = ({apiLimitCount = 0}: sidebarProps) => {
+const Sidebar = () => {
   const pathname = usePathname();
 
 
@@ -106,10 +103,6 @@ const Sidebar = ({apiLimitCount = 0}: sidebarProps) => {
           ))}
         </div>
       </div>
-
-      <LimitCounter
-      apiLimitCount={apiLimitCount}
-      />
     </div>
   );
 };

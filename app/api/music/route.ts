@@ -29,11 +29,11 @@ export async function POST(
       }
 
             
-      const freeTrial = await checkApiLimit();
+      // const freeTrial = await checkApiLimit();
 
-      if (!freeTrial){
-        return new NextResponse("Free trial has expired.", {status: 403});
-      }
+      // if (!freeTrial){
+      //   return new NextResponse("Free trial has expired.", {status: 403});
+      // }
   
 
       const response = await replicate.run(
@@ -46,7 +46,7 @@ export async function POST(
         }
       );
 
-      await increaseApiLimit();
+      // await increaseApiLimit();
   
       return NextResponse.json(response);
     } catch (error) {

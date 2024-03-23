@@ -28,11 +28,11 @@ export async function POST(
         return new NextResponse("Prompt are required", { status: 400 });
       }
 
-      const freeTrial = await checkApiLimit();
+      // const freeTrial = await checkApiLimit();
 
-      if (!freeTrial){
-        return new NextResponse("Free trial has expired.", {status: 403});
-      }
+      // if (!freeTrial){
+      //   return new NextResponse("Free trial has expired.", {status: 403});
+      // }
   
       
       const response =  await replicate.run(
@@ -45,7 +45,7 @@ export async function POST(
         }
       );
   
-      await increaseApiLimit();
+      // await increaseApiLimit();
       return NextResponse.json(response);
     } catch (error) {
       console.log('[MUSIC_ERROR]', error);

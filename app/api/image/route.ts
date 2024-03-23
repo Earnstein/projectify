@@ -38,11 +38,11 @@ export async function POST(
       }
 
             
-      const freeTrial = await checkApiLimit();
+      // const freeTrial = await checkApiLimit();
 
-      if (!freeTrial){
-        return new NextResponse("Free trial has expired.", {status: 403});
-      }
+      // if (!freeTrial){
+      //   return new NextResponse("Free trial has expired.", {status: 403});
+      // }
   
       const response = await openai.images.generate({
         model: "dall-e-2",
@@ -51,7 +51,7 @@ export async function POST(
         size: resolution,
       });     
 
-      await increaseApiLimit();
+      // await increaseApiLimit();
       
       return NextResponse.json(response.data);
     } catch (error) {
